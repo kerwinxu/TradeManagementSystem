@@ -12,25 +12,24 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * 产品属性表
- * @author kerwin
- *
- */
+// 权限表。内容只是一个权限名称而已。
 @Entity
 @Getter
 @Setter
-@Table(name = "product_property")
-public class ProductProperty {
+@Table(name = "authority")
+public class Authority {
 	
+	// 如下是这个表本身的数据
 	@Id
 	@GeneratedValue
 	private Integer  id; // id
 	
-	@Column
-	private String name;
+	@Column(length = 100)
+	private String name;  // 这个是名称
 	
-	@ManyToMany(mappedBy = "productProperties")
-	private List<ProductCategory> productCategories;
 	
+	// 如下是这个表关联的表。权限表只跟角色表有关联。
+	@ManyToMany()
+	private List<Role> roles;
+
 }

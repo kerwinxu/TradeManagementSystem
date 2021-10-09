@@ -1,6 +1,5 @@
 package tradeManagementSystem.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,36 +7,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 属性值表
+ * 这个是产品权限系统
  * @author kerwin
  *
  */
 @Entity
-@Data
-@Table(name = "product_property_value")
-public class ProductPropertyValue {
-	
-
+@Getter
+@Setter
+@Table(name = "product_authority")
+public class ProductAuthority {
 	@Id
 	@GeneratedValue
 	private Integer  id; // id
 	
+	// 如下是一堆的外键
+	@ManyToOne
+	//@JoinColumn(name = "contactId")
+	private Contact contact; // 联系人
 	@ManyToOne
 	//@JoinColumn(name = "productId")
-	protected Product product;              // 产品。
-	
-	
+	private Product product; // 产品
 	@ManyToOne
-	//@JoinColumn(name = "productPropertyId")
-	private ProductProperty productProperty; // 产品属性
-	
-
-	@Column
-	private String value;       // 属性值。
-	
-
+	//@JoinColumn(name = "authorityId")
+	private Authority authority; // 权限
 
 }

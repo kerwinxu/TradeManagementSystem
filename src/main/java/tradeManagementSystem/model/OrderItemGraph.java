@@ -1,6 +1,6 @@
 package tradeManagementSystem.model;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,14 +11,14 @@ import javax.persistence.Table;
 import lombok.Data;
 
 /**
- * 属性值表
+ * 客户的订单项目对应着供货商的订单项目
  * @author kerwin
  *
  */
 @Entity
 @Data
-@Table(name = "product_property_value")
-public class ProductPropertyValue {
+@Table(name = "order_item_graph")
+public class OrderItemGraph {
 	
 
 	@Id
@@ -26,18 +26,11 @@ public class ProductPropertyValue {
 	private Integer  id; // id
 	
 	@ManyToOne
-	//@JoinColumn(name = "productId")
-	protected Product product;              // 产品。
-	
+	//@JoinColumn(name = "customer_order_item_id")
+	private OrderItem customerOrderItem; // 客户订单项目
 	
 	@ManyToOne
-	//@JoinColumn(name = "productPropertyId")
-	private ProductProperty productProperty; // 产品属性
-	
-
-	@Column
-	private String value;       // 属性值。
-	
-
+	//@JoinColumn(name = "supplier_order_item_id")
+	private OrderItem supplierOrderItem; // 供货商的订单项目
 
 }

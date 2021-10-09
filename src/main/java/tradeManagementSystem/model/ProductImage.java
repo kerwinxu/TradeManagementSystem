@@ -1,36 +1,31 @@
 package tradeManagementSystem.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * 产品属性表
- * @author kerwin
- *
- */
+// 产品的图片
 @Entity
-@Getter
 @Setter
-@Table(name = "product_property")
-public class ProductProperty {
-	
+@Getter
+@Table(name = "product_image")
+public class ProductImage {
+
 	@Id
 	@GeneratedValue
 	private Integer  id; // id
 	
+	@ManyToOne
+	//@JoinColumn(name = "productId")
+	protected Product product;              // 产品。
+	
 	@Column
-	private String name;
-	
-	@ManyToMany(mappedBy = "productProperties")
-	private List<ProductCategory> productCategories;
-	
+	private String imagePath;   // 图片路径。
 }
