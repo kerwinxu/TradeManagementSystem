@@ -1,6 +1,7 @@
 package tradeManagementSystem.securityConfig;
 
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -17,6 +18,7 @@ import tradeManagementSystem.service.UserDetailsServiceImpl;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	// 这个就是返回用户信息的。
+	@Bean
 	@Override
 	protected UserDetailsService userDetailsService() {
 		// TODO Auto-generated method stub
@@ -59,7 +61,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 @Override
 	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	        // 使用自定义的 UserDetailService
-	        auth.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+	        auth
+	        .inMemoryAuthentication()
+	        .passwordEncoder(new BCryptPasswordEncoder())
+	        .withUser("admin")
+	        .password(new BCryptPasswordEncoder().encode("admin"))
+	        .roles("admin")
+	        ;
+	        //.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
 	    }
 
 }
