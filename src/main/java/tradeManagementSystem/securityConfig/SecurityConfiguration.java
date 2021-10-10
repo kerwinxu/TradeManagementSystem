@@ -48,10 +48,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf() // 跨站
 	    .disable() // 关闭跨站检测
 		.authorizeRequests()
-		.antMatchers("/admin/**").hasRole("sys_admin")  // 只有超级管理员才能访问这个目录内的
-		.antMatchers("/user/**/add").hasAnyRole("user", "sys_admin")  // 增加操作
-		.antMatchers("/user/**/select").hasAnyRole("user", "sys_admin", "guest", "sys_guest") // 查询操作
-		.antMatchers("/user/**/update").hasAnyRole("user", "sys_admin")  // 更新操作。
+		.antMatchers("/admin/**").hasRole("admin")  // 只有超级管理员才能访问这个目录内的
+		.antMatchers("/user/**/add").hasAnyRole("user", "admin")  // 增加操作
+		.antMatchers("/user/**/select").hasAnyRole("user", "admin", "guest", "sys_guest") // 查询操作
+		.antMatchers("/user/**/update").hasAnyRole("user", "admin")  // 更新操作。
 		.and()
 		.formLogin();
 	}
